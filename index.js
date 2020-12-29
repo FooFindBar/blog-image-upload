@@ -2,6 +2,7 @@ const express=require("express");
 const app=express();
 const uploadFile=require("./uploadfile");
 const path =require('path')
+const {ip,port}=require('./config')
 
 // 设置跨域访问
 app.all("*", function (req, res, next) {
@@ -26,9 +27,9 @@ app.post("/upload",uploadFile,(req,res)=>{
   //将req.body里的数据存储到数据库
   let imageUrl=req.file.filename
   let img={
-    imageUrl:`http://localhost:3000/${imageUrl}`,
+    imageUrl:`http://${ip}:3000/${imageUrl}`,
     imageName:imageUrl
   }
   res.send(img);
 })
-app.listen(3000);
+app.listen(port);
